@@ -7,25 +7,30 @@ from utils import *
 from archs import *
 from losses import *
 from base_trainer import *
+import wandb
 
 class SID_Trainer(Base_Trainer):
     def __init__(self):
         super().__init__()
         # model
         self.net = globals()[self.arch['name']](self.arch)
+        print('arc name: ', self.arch['name'])
         # load weight
+        '''
         if self.hyper['last_epoch']:    # 不是初始化
             try:
                 model_path = os.path.join(f'./checkpoints/{self.model_name}_best_model.pth')
                 if not os.path.exists(model_path):
                     model_path = os.path.join(f'./checkpoints/{self.model_name}_last_model.pth')
+                print('model loading path', model_path)
                 model = torch.load(model_path, map_location=self.device)
                 self.net = load_weights(self.net, model, by_name=True)
             except:
                 log('No checkpoint file!!!')
         else:
             log(f'Initializing {self.arch["name"]}...')
-            # initialize_weights(self.net)
+        '''
+        initialize_weights(self.net)
 
         self.optimizer = Adam(self.net.parameters(), lr=self.hyper['learning_rate'])
         
@@ -47,6 +52,7 @@ class SID_Trainer(Base_Trainer):
         self.corrector = IlluminanceCorrect()
         torch.backends.cudnn.benchmark = True
         # model log
+        print('hyper:', self.hyper)
         self.best_psnr = self.hyper['best_psnr'] if 'best_psnr' in self.hyper else 0
         last_eval_epoch = self.hyper['last_epoch'] // self.hyper['plot_freq']
         self.train_psnr = AverageMeter('PSNR', ':2f', last_epoch=self.hyper['last_epoch'])
@@ -87,15 +93,30 @@ class SID_Trainer(Base_Trainer):
     
     def change_eval_dst(self, mode='eval'):
         self.dst = self.args[f'dst_{mode}']
+        print('\ndst:', self.dst)
         self.dstname = self.dst['dstname']
+        print('\ndstname', self.dstname)
         self.dst_eval = globals()[self.dst['dataset']](self.dst)
+        print('\n loading eval data in:',self.dst_eval)
         self.dataloader_eval = DataLoader(self.dst_eval, batch_size=1, shuffle=False, 
                                     num_workers=self.args['num_workers'], pin_memory=False)
         self.cache_dir = f'/data/cache/{self.dstname}'
+        print('\ncache_dir', self.cache_dir)
 
     def train(self):
         self.scheduler.step()
         lr = self.scheduler.get_last_lr()[0]
+        wandb.init(
+            # set the wandb project where this run will be logged
+            project="PMN_train",
+            
+            # track hyperparameters and run metadata
+            config={
+            "architecture": "UNetSeeInDark",
+            "dataset": "Mix_Dataset",
+            "epochs": f"{self.hyper['stop_epoch']}",
+            }
+        )         
         for epoch in range(self.hyper['last_epoch']+1, self.hyper['stop_epoch']+1):
             # log init
             self.net.train()
@@ -108,13 +129,17 @@ class SID_Trainer(Base_Trainer):
                 for k, data in enumerate(self.dataloader_train):
                     runtime['dataloader'] += timestamp(time_points, 1)
                     # Preprocess
+                    print(f"\nruntime in loading data: {runtime['dataloader']:.4f}" )
                     imgs_lr, imgs_hr, ratio = self.preprocess(data, mode='train', preprocess=True)
+                    print('\nnet input shape: ', imgs_lr.shape)
+                    print('\ntarget shape:', imgs_hr.shape)
                     runtime['preprocess'] += timestamp(time_points, 2)
-                    
+                    print(f"\nruntime in preprosses: {runtime['preprocess']:.4f}")
                     # 训练
                     self.optimizer.zero_grad()
                     pred = self.net(imgs_lr)
                     runtime['net'] += timestamp(time_points, 3)
+                    print(f"\nruntime in go througth net:{runtime['net']:.4f}")
                     # 极暗，乘上去
                     if self.dst['ori'] is True:
                         pred = pred * ratio
@@ -122,7 +147,7 @@ class SID_Trainer(Base_Trainer):
                     loss.backward()
                     self.optimizer.step()
                     runtime['bp'] += timestamp(time_points, 4)
-
+                    print(f"\nruntime in back progress:{runtime['bp']:.4f}")
                     # 更新tqdm的参数
                     with torch.no_grad():
                         if self.arch['use_dpsv']: 
@@ -135,7 +160,10 @@ class SID_Trainer(Base_Trainer):
                         imgs_hr = torch.clamp(imgs_hr, 0, 1)
                         psnr = PSNR_Loss(pred, imgs_hr)
                         self.train_psnr.update(psnr.item())
-                    
+                    wandb.log({'epoch': epoch + 1, 'loss': loss.item()})
+                    wandb.log({'epoch': epoch + 1, 'PSNR': psnr.item()})
+                    wandb.log({'epoch': epoch + 1, 'learning rate': lr.item()})
+                    # wandb.watch(self.net, log="all")
                     runtime['total'] = runtime['preprocess']+runtime['dataloader']+runtime['net']+runtime['bp']
                     t.set_description(f'Epoch {epoch}')
                     t.set_postfix({'lr':f"{lr:.2e}", 'PSNR':f"{self.train_psnr.avg:.2f}",
@@ -155,11 +183,14 @@ class SID_Trainer(Base_Trainer):
                 model_dict = self.net.module.state_dict() if self.multi_gpu else self.net.state_dict()
                 epoch_id = epoch // self.hyper['plot_freq'] * self.hyper['plot_freq']
                 save_path = os.path.join(self.model_dir, '%s_e%04d.pth'% (self.model_name, epoch_id))
+                print('save path', save_path)
                 torch.save(model_dict, save_path)
             
             # 输出过程量，随时看
             savefile = os.path.join(self.sample_dir, f'{self.model_name}_train_psnr.jpg')
             logfile = os.path.join(self.sample_dir, f'{self.model_name}_train_psnr.pkl')
+            savefile = f'{self.model_name}_train_psnr.jpg'
+            print('\nsavefile path:', savefile)
             self.train_psnr.plot_history(savefile=savefile, logfile=logfile)
             # if epoch % self.hyper['plot_freq'] == 0:
             wb = data['wb'][0].numpy()
@@ -199,7 +230,8 @@ class SID_Trainer(Base_Trainer):
                     self.net = load_weights(self.net, model, by_name=True, multi_gpu=self.multi_gpu)
                     log(f'Successfully reload best model (Eval PSNR:{self.best_psnr})',
                         log=f'./logs/log_{self.model_name}.log')
-
+        wandb.finish()
+        
     def eval(self, epoch=-1):
         self.net.eval()
         self.eval_psnr.reset()
@@ -214,6 +246,7 @@ class SID_Trainer(Base_Trainer):
         # record every metric
         metrics = {}
         metrics_path = f'./metrics/{self.model_name}_metrics.pkl'
+        print('metrics path:', metrics_path)
         if os.path.exists(metrics_path):
             with open(metrics_path, 'rb') as f:
                 metrics = pkl.load(f)
@@ -223,13 +256,16 @@ class SID_Trainer(Base_Trainer):
         with tqdm(total=len(self.dataloader_eval)) as t:
             for k, data in enumerate(self.dataloader_eval):
                 # 由于crops的存在，Dataloader会把数据变成5维，需要view回4维
+                print('data keys', data.keys())
                 imgs_lr, imgs_hr, ratio = self.preprocess(data, mode='eval', preprocess=False)
                 wb = data['wb'][0].numpy()
                 ccm = data['ccm'][0].numpy()
                 name = data['name'][0]
                 ISO = data['ISO'].item()
                 # print(ISO)
-
+                print('\nimage \'s name:', name)
+                print('\nimgs_lr shape:', imgs_lr.shape)
+                print('\nimgs_hr shape:', imgs_hr.shape)
                 with torch.no_grad():
                     # # 太大了就用下面这个策略
                     # croped_imgs_lr = self.dst_eval.eval_crop(imgs_lr)
@@ -456,6 +492,7 @@ def MultiProcessPlot(imgs_lr, imgs_dn, imgs_hr, wb, ccm, name, save_plot, epoch,
 
 if __name__ == '__main__':
     trainer = SID_Trainer()
+    print('trainer.model', trainer.mode)
     if trainer.mode == 'train':
         trainer.train()
         savefile = os.path.join(trainer.sample_dir, f'{trainer.model_name}_train_psnr.jpg')
@@ -465,15 +502,20 @@ if __name__ == '__main__':
         trainer.mode = 'evaltest'
     # best_model
     best_model_path = os.path.join(f'./checkpoints/{trainer.model_name}_best_model.pth')
+    print('load model path:', best_model_path)
     if os.path.exists(best_model_path) is False: 
         best_model_path = os.path.join(f'./checkpoints/{trainer.model_name}_last_model.pth')
+    print('\ndevice:', trainer.device)
     best_model = torch.load(best_model_path, map_location=trainer.device)
+    print(trainer.multi_gpu)
     trainer.net = load_weights(trainer.net, best_model, multi_gpu=trainer.multi_gpu)
     if 'eval' in trainer.mode:
         # ELD
         trainer.change_eval_dst('eval')
+        print('trainer arg', trainer.args['dst_eval']['ratio_list'])
         for dgain in trainer.args['dst_eval']['ratio_list']:
             info_path = os.path.join(trainer.cache_dir, f'{trainer.dstname}_{dgain}.pkl')
+            print('info path:', info_path)
             if os.path.exists(info_path):
                 with open(info_path,'rb') as f:
                     trainer.infos = pkl.load(f)
@@ -481,7 +523,7 @@ if __name__ == '__main__':
             trainer.dst_eval.ratio_list=[dgain]
             trainer.dst_eval.recheck_length()
             metrics = trainer.eval(-1)
-            print(metrics)
+#             print(metrics)
 
     if 'test' in trainer.mode:
         # SID
@@ -489,10 +531,13 @@ if __name__ == '__main__':
         SID_ratio_list = [100, 250, 300]
         for dgain in SID_ratio_list:
             info_path = os.path.join(trainer.cache_dir, f'{trainer.dstname}_{dgain}.pkl')
+            print('info path:', info_path)
             if os.path.exists(info_path):
                 with open(info_path,'rb') as f:
                     trainer.infos = pkl.load(f)
             log(f'SID Datasets: Dgain={dgain}',log=f'./logs/log_{trainer.model_name}.log')
             trainer.dst_eval.change_eval_ratio(ratio=dgain)
             metrics = trainer.eval(-1)
-            print(metrics)
+#             print(metrics)
+    print('------------------------------------------------------\n')
+    print('result in model path:', best_model_path)
