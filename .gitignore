@@ -2,6 +2,7 @@ __pycache__/*
 images/*
 *.pyc
 *.pth
+*.jpg
 saved_model/*
 logs/*
 data/*
