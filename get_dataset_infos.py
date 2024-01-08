@@ -49,7 +49,7 @@ def get_SID_info(info_dir='info', root_dir='/data/SID/Sony', mode='train'):
     for i in pbar:
         path = os.path.join(root_dir, names[i])
         info = get_basic_info(path)
-        info['ratio'] = np.zeros(len(paths_short[i]), dtype=np.int)
+        info['ratio'] = np.zeros(len(paths_short[i]), dtype=np.int_)
         for k in range(len(paths_short[i])):
             info_short = get_basic_info(paths_short[i][k])
             info['ratio'][k] = int(info['ExposureTime']/info_short['ExposureTime'])

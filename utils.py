@@ -449,6 +449,7 @@ def plot_sample(img_lr, img_dn, img_hr, filename='result', model_name='Unet',
     savefile = os.path.join(save_path, "{}-Epoch{}.jpg".format(filename, epoch))
     if save_plot:
         denoisedfile = os.path.join(save_path, "{}_denoised.png".format(filename))
+        print('denoise image saved in :',denoisedfile)
         cv2.imwrite(denoisedfile, img_dn[:,:,::-1])
         fig.savefig(savefile, bbox_inches='tight')
         plt.close()
@@ -509,10 +510,58 @@ def quality_assess(X, Y, data_range=255):
     # Y: correct; X: estimate
     if X.ndim == 3:
         psnr = compare_psnr(Y, X, data_range=data_range)
-        ssim = compare_ssim(Y, X, data_range=data_range, multichannel=True)
+        ssim = compare_ssim(Y, X, data_range=data_range, channel_axis = -1)
         return {'PSNR':psnr, 'SSIM': ssim}
     else:
         raise NotImplementedError
+
+def cal_sum(noise_img, clean_img):
+    noise_signal = noise_img - clean_img
+    clean_signal = clean_img
+    noise_signal_2 = noise_signal**2
+    clean_signal_2 = clean_signal**2
+    clean_sum1 = np.sum(clean_signal_2)
+    noise_sum2 = np.sum(noise_signal_2)
+    # print(sum1/sum2)
+    # snrr=20*math.log10(math.sqrt(sum1)/math.sqrt(sum2))
+    # snr = 10 * math.log10(sum1 / sum2)
+    return clean_sum1, noise_sum2
+
+
+def CalSNR(image_path,coor_data):
+    '''
+    Input image data or a image path, with a coordinates data in shape [len(coor_data), 4]
+    '''
+    if isinstance(image_path,str):
+        image = cv2.imread(image_path)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY).astype(np.float32)
+    elif isinstance(image_path,np.ndarray):
+        image = image_path
+    else:
+        print('error,input type :',type(image_path))
+        assert(0)
+    
+    # coor_data = np.loadtxt('coordinate.txt')
+    
+    clean_sum = 0
+    noise_sum = 0
+    clean_value_list = []
+
+    for i in range(len(coor_data)):
+        clean_value = np.mean(image[int(coor_data[i][1]):int(coor_data[i][3]),int(coor_data[i][0]):int(coor_data[i][2])])
+        clean_value_list.append(clean_value)
+    for i in range(len(coor_data)):
+        noise = image[int(coor_data[i][1]):int(coor_data[i][3]), int(coor_data[i][0]):int(coor_data[i][2])]
+        clean = np.zeros_like(noise)
+        clean[:] = clean_value_list[i]
+        sum1, sum2 = cal_sum(noise, clean)
+        clean_sum += sum1
+        noise_sum += sum2
+        # clean_value_list.append(clean_value)
+        # break
+    snr = 10 * math.log10(clean_sum / noise_sum)
+    return snr
+
 
 def bayer2rows(bayer):
     H, W = bayer.shape

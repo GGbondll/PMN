@@ -17,6 +17,7 @@ from .unprocess import random_gains
 
 Dual_ISO_Cameras = ['SonyA7S2']
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print('设备：', DEVICE)
 def FastGuidedFilter(p,I,d=15,eps=4e-5):
     p_lr = cv2.resize(p, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_LINEAR)
     I_lr = cv2.resize(I, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_LINEAR)

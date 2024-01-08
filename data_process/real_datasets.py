@@ -1,6 +1,6 @@
 import pickle
 from numpy.core.numeric import argwhere
-from numpy.lib.financial import rate
+# from numpy.lib.financial import rate
 import torch
 import numpy as np
 import cv2
@@ -369,6 +369,7 @@ class Mix_Dataset(SID_Dataset):
         lr_id = np.random.randint(len(self.infos[idx]['short'])) if self.args['mode']=='train' else 0
         lr_raw = np.array(dataload(self.infos[idx]['short'][lr_id])).reshape(self.H,self.W)
         dgain = self.infos[idx]['ratio'][lr_id]
+        print(dgain)
 
         if 'darkshading' in self.args['command']:
             lr_raw = lr_raw - self.get_darkshading(data['ISO'])

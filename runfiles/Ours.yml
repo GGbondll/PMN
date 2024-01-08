@@ -8,7 +8,7 @@ save_plot: True
 brightness_correct: True
 
 dst: &base_dst
-  root_dir: '/data/SID'
+  root_dir: './data/SID'
   ds_dir: 'resources'
   dataset: 'SID_Dataset' 
   dstname: 'SID'
@@ -32,7 +32,7 @@ dst_train:
   dstname: 'SID'
 dst_eval:
   <<: *base_dst
-  root_dir: '/data/ELD'
+  root_dir: './data/ELD'
   mode: 'eval'
   dataset: 'ELD_Dataset' 
   dstname: 'ELD'

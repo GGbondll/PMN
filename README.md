@@ -34,10 +34,10 @@ SID ([official project](https://github.com/cchen156/Learning-to-See-in-the-Dark)
 1. use `get_dataset_infos.py` to generate dataset infos
 ```bash 
 # Evaluate
-python3 get_dataset_infos.py --dstname ELD --root_dir /data/ELD --mode SonyA7S2
-python3 get_dataset_infos.py --dstname SID --root_dir /data/SID/Sony --mode evaltest
+python3 get_dataset_infos.py --dstname ELD --root_dir ./data/ELD --mode SonyA7S2
+python3 get_dataset_infos.py --dstname SID --root_dir ./data/SID/Sony --mode evaltest
 # Train
-python3 get_dataset_infos.py --dstname SID --root_dir /data/SID/Sony --mode train
+python3 get_dataset_infos.py --dstname SID --root_dir ./data/SID/Sony --mode train
 ```
 2. evaluate
 ```bash 

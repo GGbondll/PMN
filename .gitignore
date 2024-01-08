@@ -4,3 +4,6 @@ images/*
 *.pth
 saved_model/*
 logs/*
+data/*
+denosie_result/*
+wandb/*
