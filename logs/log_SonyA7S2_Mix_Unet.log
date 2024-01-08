@@ -96,3 +96,428 @@ ssims_lr=0.3286, ssims_dn=0.9434
 2022-04-26 03:44:27 >>  Epoch -1: PSNR=37.22
 psnrs_lr=22.26, psnrs_dn=37.22
 ssims_lr=0.2691, ssims_dn=0.9281
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-25 10:02:55 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-25 14:29:17 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-25 14:40:42 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-25 15:25:03 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 10:14:47 >>  SID Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 11:54:08 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 12:34:14 >>  SID Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 13:59:19 >>  SID Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 14:18:03 >>  SID Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 14:18:22 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 14:19:49 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 14:21:50 >>  SID Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 14:28:23 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 14:31:34 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 14:50:15 >>  SID Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 15:02:10 >>  SID Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 15:09:07 >>  SID Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 15:22:28 >>  SID Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 15:29:10 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 15:29:33 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 15:44:29 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 15:53:54 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 16:10:55 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 16:13:35 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 16:15:55 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 17:13:38 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 17:19:52 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 17:26:26 >>  ELD Datasets: Dgain=100
+Model Name:	SonyA7S2_Mix_Unet
+Architecture:	UNetSeeInDark
+TrainDataset:	Mix_Dataset
+EvalDataset:	ELD_Dataset
+CameraType:	SonyA7S2
+num_channels:	32
+BatchSize:	1
+PatchSize:	512
+LearningRate:	0.0002
+Epoch:		1800
+num_workers:	4
+Command:	augv1.2, idremap, darkshading2
+Let's use 0 GPUs!
+2023-12-26 17:29:37 >>  ELD Datasets: Dgain=100
+2023-12-26 18:20:46 >>  Epoch -1: PSNR=46.50
+psnrs_lr=31.22, psnrs_dn=46.50
+ssims_lr=0.5146, ssims_dn=0.9852
+2023-12-26 18:20:46 >>  ELD Datasets: Dgain=200
+2023-12-26 19:04:38 >>  Epoch -1: PSNR=44.51
+psnrs_lr=26.28, psnrs_dn=44.51
+ssims_lr=0.2401, ssims_dn=0.9708
+2023-12-26 19:11:37 >>  SID Datasets: Dgain=100
+2023-12-26 20:18:48 >>  Epoch -1: PSNR=43.16
+psnrs_lr=29.35, psnrs_dn=43.16
+ssims_lr=0.5259, ssims_dn=0.9598
+2023-12-26 20:18:48 >>  SID Datasets: Dgain=250
+2023-12-26 21:00:59 >>  Epoch -1: PSNR=40.92
+psnrs_lr=24.00, psnrs_dn=40.92
+ssims_lr=0.3346, ssims_dn=0.9471
+2023-12-26 21:00:59 >>  SID Datasets: Dgain=300
+2023-12-26 21:49:54 >>  Epoch -1: PSNR=37.77
+psnrs_lr=22.48, psnrs_dn=37.77
+ssims_lr=0.2757, ssims_dn=0.9341
