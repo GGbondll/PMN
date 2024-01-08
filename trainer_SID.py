@@ -162,7 +162,7 @@ class SID_Trainer(Base_Trainer):
                         self.train_psnr.update(psnr.item())
                     wandb.log({'epoch': epoch + 1, 'loss': loss.item()})
                     wandb.log({'epoch': epoch + 1, 'PSNR': psnr.item()})
-                    wandb.log({'epoch': epoch + 1, 'learning rate': lr.item()})
+                    # wandb.log({'epoch': epoch + 1, 'learning rate': lr.item()})
                     # wandb.watch(self.net, log="all")
                     runtime['total'] = runtime['preprocess']+runtime['dataloader']+runtime['net']+runtime['bp']
                     t.set_description(f'Epoch {epoch}')
@@ -189,7 +189,6 @@ class SID_Trainer(Base_Trainer):
             # 输出过程量，随时看
             savefile = os.path.join(self.sample_dir, f'{self.model_name}_train_psnr.jpg')
             logfile = os.path.join(self.sample_dir, f'{self.model_name}_train_psnr.pkl')
-            savefile = f'{self.model_name}_train_psnr.jpg'
             print('\nsavefile path:', savefile)
             self.train_psnr.plot_history(savefile=savefile, logfile=logfile)
             # if epoch % self.hyper['plot_freq'] == 0:
